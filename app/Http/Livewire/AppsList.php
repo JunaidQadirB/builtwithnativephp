@@ -13,6 +13,7 @@ class AppsList extends Component
 
     public string $searchTerm = '';
     public $selectedCategories = [];
+    public $selectedPlatforms = [];
 
     public function updatingSearch()
     {

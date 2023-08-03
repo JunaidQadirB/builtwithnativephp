@@ -28,4 +28,18 @@ class App extends Model
     {
         return $this->belongsToMany(AppCategory::class);
     }
+
+    public function platforms()
+    {
+        return $this->belongsToMany(AppPlatform::class, 'app_app_platform', 'app_id', 'app_platform_id');
+    }
+
+    public function platformIcons()
+    {
+        return $this->platforms->map(function ($platform) {
+            return '/vendor/blade-heroicons/m-' . $platform->slug . 'svg';
+
+        });
+
+    }
 }
