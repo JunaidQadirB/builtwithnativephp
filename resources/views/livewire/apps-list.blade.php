@@ -1,5 +1,5 @@
 <div>
-    <livewire:search :search-term="$searchTerm" onSearch="search"/>
+    <livewire:search :categories="(object)$categories" :selectedCategories="$selectedCategories" :search-term="$searchTerm" onSearch="search"/>
    <div>
        <ul class="relative sm:flex flex-wrap sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white p-1">
            @forelse($apps as $app)

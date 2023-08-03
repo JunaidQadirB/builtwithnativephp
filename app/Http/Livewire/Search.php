@@ -8,39 +8,35 @@ use Livewire\Component;
 class Search extends Component
 {
     public $searchTerm = '';
-    public $searchInCategories = [];
+    public $selectedCategories = [];
+    public $categories = [];
     public $isOpen = false;
 
-    public function clearSearchTerm()
+    public function clearSearchTerm(): void
     {
         $this->searchTerm = '';
         $this->emit('onClearSearch');
     }
-    public function toggleSearchInCategories()
+
+    public function toggleselectedCategories(): void
     {
         $this->isOpen = !$this->isOpen;
     }
 
-    public function clearSearchInCategories(): void
+    public function unSelectAllCategories(): void
     {
-        $this->searchInCategories = [];
+        $this->selectedCategories = [];
     }
 
-    public function selectAllCategories()
-    {
-
-    }
-
-    public function search()
+    public function search(): void
     {
         $this->emit('onSearch', $this->searchTerm,
-            $this->searchInCategories
+            $this->selectedCategories
         );
     }
 
     public function render()
     {
-        $categories = AppCategory::all();
-        return view('livewire.search', compact('categories'));
+        return view('livewire.search');
     }
 }

@@ -11,27 +11,24 @@
                 </svg>
             </button>
             <div id="dropdown"
-                 class="relative z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 h-48 overflow-y-scroll">
-                <div class="sticky top-0 inline-flex w-full" role="group">
-                    <button type="button"
-                            class="px-4 py-2 text-xs font-medium text-gray-900 bg-white border border-gray-200 rounded-l-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                            wire:click.prevent="selectAllCategories"
-                    >
-                        Select All
-                    </button>
-                    <button type="button"
-                            class="px-4 py-2 text-xs font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
-                            wire:click.prevent="clearSearchTerm"
-                    >
-                        Clear
-                    </button>
+                 class="w-2/12 relative z-10 hidden bg-white divide-y divide-gray-100 border border-gray-300 rounded-lg shadow-lg w-44 dark:bg-gray-700">
+                <div class="sticky inline-flex w-full px-0 w-full">
+                    <div class="inline-flex rounded-md shadow-sm w-full" role="group">
+                        <button type="button"
+                                class="w-full px-4 py-2 text-xs font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white rounded-r"
+                                wire:click.prevent="unSelectAllCategories"
+                        >
+                            Clear
+                        </button>
+                    </div>
                 </div>
-                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+
+                <ul class="py-2 text-sm text-gray-700 dark:text-gray-200 h-48 overflow-y-scroll" aria-labelledby="dropdown-button">
                     @foreach($categories as $category)
                         <li wire:key="categories_li_{{$category->id}}">
                             <label for="category_{{$category->slug}}"
                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                <input id="category_{{$category->slug}}" wire:model="searchInCategories" type="checkbox"
+                                <input id="category_{{$category->slug}}" wire:model="selectedCategories" type="checkbox"
                                        value="{{$category->slug}}"
                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                                 {{$category->name}}</label>
@@ -42,7 +39,7 @@
             <div class="relative w-full">
                 <input wire:model="searchTerm" type="search" id="search-dropdown"
                        class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                       placeholder="Search Mockups, Logos, Design Templates..." required>
+                       placeholder="Find your favorite NativePHP app" required>
 
                 <button type="submit"
                         class="absolute top-0 right-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
