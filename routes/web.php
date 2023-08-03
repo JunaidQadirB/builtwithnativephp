@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\App;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', \App\Http\Livewire\AppsList::class)->name('home');
+
+Route::get('apps', \App\Http\Livewire\AppsList::class)->name('apps.index');
+
+Route::get('apps/{app}', \App\Http\Livewire\AppDetails::class)->name('apps.show');
 
 Route::middleware([
     'auth:sanctum',
