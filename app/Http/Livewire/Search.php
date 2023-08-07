@@ -18,7 +18,7 @@ class Search extends Component
         $this->emit('onClearSearch');
     }
 
-    public function toggleselectedCategories(): void
+    public function toggleCategoriesDropdown(): void
     {
         $this->isOpen = !$this->isOpen;
     }

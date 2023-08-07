@@ -9,6 +9,7 @@
         "blade-ui-kit/blade-heroicons": "^2.1",
         "blade-ui-kit/blade-icons": "^1.5",
         "guzzlehttp/guzzle": "^7.2",
+        "hisorange/browser-detect": "^4.5",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^3.2",
         "laravel/sanctum": "^3.2",

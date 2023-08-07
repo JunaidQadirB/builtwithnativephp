@@ -40,6 +40,38 @@ class App extends Model
             return '/vendor/blade-heroicons/m-' . $platform->slug . 'svg';
 
         });
+    }
 
+    public function downloadUrls()
+    {
+        $isPlatform = (object)$this->platforms
+            ->map(function ($platform) {
+                return (object)[
+                    'name' => $platform->name,
+                    'slug' => $platform->slug,
+                    'url' => url("/apps/{$this->slug}/download/" . $platform->slug),
+                ];
+            })->toArray();
+
+        return $isPlatform;
+    }
+
+    public function similarApps()
+    {
+        // Apps in categories as this app
+        // ignore self
+        // limit to 3
+
+        return self::whereHas('categories', function ($query) {
+            $query->whereIn('slug', $this->categories->pluck('slug'));
+        })
+            ->where('slug', '!=', $this->slug)
+            ->limit(3)
+            ->get();
+    }
+
+    public function publisher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(AppPublisher::class,'publisher_id');
     }
 }

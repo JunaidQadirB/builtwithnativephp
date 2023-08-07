@@ -1,41 +1,32 @@
 <div>
-    <livewire:search :categories="(object)$categories" :selectedCategories="$selectedCategories" :search-term="$searchTerm" onSearch="search"/>
-   <div>
-       <ul class="relative sm:flex flex-wrap sm:justify-center sm:items-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white p-1">
-           @forelse($apps as $app)
-               <li class="flex flex-col gap-2 w-48 bg-gray-50 p-3">
-                   <a href="{{$app->url}}" class="gap-6">
-                       <img class="rounded-3xl" src="{{$app->icon}}" width="185" alt="{{$app->name}}"/>
-                       <h2 class="text-xl px-2 my-3 font-bold break-all truncate"
-                           title="{{$app->name}}">{{$app->id}} {{$app->name}}</h2>
-                       <div class="text-gray-400 text-sm">
-                           {{$app->categories->count() ? $app->categories->pluck('name')->join(', ') : 'Uncategorized'}}
-                       </div>
-                       <div class="flex justify-between">
-                           <div>⭐⭐⭐</div>
-                           <div>
-                               <span>{{$app->price<=0 ? 'Free' : $app->formatted_price}}</span>
-                           </div>
-                       </div>
-
-                       <div class="flex justify-between my-3">
-                           @foreach($app->platforms as $platform)
-                               <img class="text-gray-400" src="{{'/vendor/blade-heroicons/m-' . $platform->slug . '.svg'}}" width="22" alt="{{$platform->name}}"/>
-
-                           @endforeach
-
-                       </div>
-                   </a>
-               </li>
-
-           @empty
-               <li>
-                   <p>No Apps to display.</p>
-               </li>
-           @endforelse
-       </ul>
-       <div class="m-3 p-3 justify-center">
-           {{$apps->links()}}
-       </div>
-   </div>
+    <div class="flex justify-center my-3">
+        <div class="inline-flex rounded-md shadow-sm" role="group">
+            <button type="button" wire:click="clearPlatform"
+                    class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900  bg-white hover:bg-gray-100 hover:text-blue-700 border border-gray-200 rounded-l-lg focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+            >All
+            </button>
+            @foreach($platforms as $os)
+                <button type="button" wire:click="togglePlatform({{$os}})"
+                        class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900  {{in_array($os->slug, $platform) ? 'bg-blue-500 hover:bg-blue-100 hover:text-blue-700':'bg-white hover:bg-gray-100 hover:text-blue-700'}} border border-gray-200 {{$loop->last?'rounded-r-lg':''}} focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-blue-500 dark:focus:text-white"
+                >{{$os->name}}
+                </button>
+            @endforeach
+        </div>
+    </div>
+    <livewire:search :categories="(object)$categories" :selectedCategories="$selectedCategories"
+                     :search-term="$searchTerm" onSearch="search"/>
+    <div>
+        <ul class="relative sm:flex flex-wrap sm:justify-start mx-auto bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white p-1 gap-3 w-11/12">
+            @forelse($apps as $app)
+                <livewire:app-card :app="$app" :key="$app->id"/>
+            @empty
+                <li class="text-center w-full">
+                    <p class="text-gray-400">No Apps to display.</p>
+                </li>
+            @endforelse
+        </ul>
+        <div class="m-3 p-3 justify-center">
+            {{$apps->links()}}
+        </div>
+    </div>
 </div>
