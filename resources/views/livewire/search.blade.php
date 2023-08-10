@@ -1,5 +1,5 @@
 <div class="my-3 flex justify-center">
-    <form class="w-6/12" wire:submit.prevent="search">
+    <form class="w-full px-3 sm:px-0 sm:w-6/12 " wire:submit.prevent="search">
         <div class="flex justify-center w-auto">
             @if ($showCategories)
                 <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="bottom"

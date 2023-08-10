@@ -1,6 +1,6 @@
 <div>
     {{--<img src="{{$app->cover}}" alt="{{$app->name}}" class="w-full"/>--}}
-    <div class="format lg:format-md w-12/12 mx-auto mt-5 mb-5">
+    <div class="format lg:format-md w-12/12 mx-auto mt-5 mb-5 px-3">
         <article class="format lg:format-md">
             <div class="flex flex-row gap-2 my-0">
                 <img src="{{$app->icon}}" alt="{{$app->name}} Icon" width="150px" class="py-0 my-0 mb-3"/>
@@ -53,11 +53,12 @@
             <div>{{$app->description}}</div>
         </article>
     </div>
-    <div class="w-full md:w-8/12 mx-auto my-9 h-96S">
-        <div class="format lg:format-md text-center">
+    <hr class="format mx-auto"/>
+    <div class="w-full md:w-8/12 mx-auto my-9 h-96S px-3 sm:px-0">
+        <div class="format max-w-full lg:format-md text-center">
             <h2 class="my-3">Similar Apps</h2>
         </div>
-        <ul class="flex flex-wrap mx-auto xs:w-full">
+        <ul class="flex flex-wrap mx-auto xs:w-full justify-center">
             @forelse ($app->similarApps() as $item)
                 <livewire:app-card
                     :app="$item"
