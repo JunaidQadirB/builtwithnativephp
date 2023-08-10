@@ -8,6 +8,7 @@ Route::get('/', \App\Http\Livewire\AppsList::class)->name('home');
 Route::get('apps', \App\Http\Livewire\AppsList::class)->name('apps.index');
 
 Route::get('apps/{app}', \App\Http\Livewire\AppDetails::class)->name('apps.show');
+Route::get('categories/{category}', \App\Http\Livewire\CategoryDetails::class)->name('categories.show');
 
 Route::middleware([
     'auth:sanctum',

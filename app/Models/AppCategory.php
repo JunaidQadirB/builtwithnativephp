@@ -11,8 +11,24 @@ class AppCategory extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function apps(): \Illuminate\Database\Eloquent\Relations\HasMany
+    protected $guarded = ['id'];
+
+    public function getRouteKeyName(): string
     {
-        return $this->hasMany(App::class);
+        return 'slug';
+    }
+
+    // only categories with status Publish will be shown on model boot
+    protected static function booted()
+    {
+        static::addGlobalScope('status', function ($query) {
+            $query->where('status', 'Publish');
+        });
+    }
+
+
+    public function apps()
+    {
+        return $this->belongsToMany(App::class);
     }
 }

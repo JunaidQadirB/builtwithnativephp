@@ -11,6 +11,7 @@ class Search extends Component
     public $selectedCategories = [];
     public $categories = [];
     public $isOpen = false;
+    public $showCategories = true;
 
     public function clearSearchTerm(): void
     {

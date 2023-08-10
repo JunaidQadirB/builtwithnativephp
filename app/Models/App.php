@@ -44,7 +44,7 @@ class App extends Model
 
     public function downloadUrls()
     {
-        $isPlatform = (object)$this->platforms
+        $isPlatform = $this->platforms
             ->map(function ($platform) {
                 return (object)[
                     'name' => $platform->name,
@@ -52,8 +52,11 @@ class App extends Model
                     'url' => url("/apps/{$this->slug}/download/" . $platform->slug),
                 ];
             })->toArray();
+        if (count($isPlatform) > 0) {
+            return (object)$isPlatform;
+        }
 
-        return $isPlatform;
+        return null;
     }
 
     public function similarApps()
@@ -72,6 +75,6 @@ class App extends Model
 
     public function publisher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(AppPublisher::class,'publisher_id');
+        return $this->belongsTo(AppPublisher::class, 'publisher_id');
     }
 }
