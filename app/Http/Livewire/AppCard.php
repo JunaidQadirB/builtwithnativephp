@@ -8,12 +8,12 @@ use Livewire\Component;
 class AppCard extends Component
 {
     public App $app;
-    public bool $shortDescription = true;
-    public bool $price = true;
-    public bool $publisher = true;
-    public bool $ratings = true;
-    public bool $categories = true;
-    public bool $platform = true;
+    public bool $showShortDescription = true;
+    public bool $showPrice = true;
+    public bool $showPublisher = true;
+    public bool $showRatings = true;
+    public bool $showCategories = true;
+    public bool $showPlatform = true;
 
     public function render()
     {

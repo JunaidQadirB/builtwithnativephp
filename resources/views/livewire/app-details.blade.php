@@ -19,7 +19,7 @@
                         </div>
                     @endif
                     <div>
-                        <livewire:star-rating></livewire:star-rating>
+                        <livewire:star-rating :app="$app" :rating="$app->userRating"></livewire:star-rating>
                     </div>
                     <div>
                         {!! $app->categories->count() ? $app->categories
@@ -54,24 +54,27 @@
         </article>
     </div>
     <hr class="format mx-auto"/>
-    <div class="w-full md:w-8/12 mx-auto my-9 h-96S px-3 sm:px-0">
-        <div class="format max-w-full lg:format-md text-center">
-            <h2 class="my-3">Similar Apps</h2>
+    @if ($app->similarApps()->count())
+        <div class="w-full md:w-8/12 mx-auto my-9 h-96S px-3 sm:px-0">
+            <div class="format max-w-full lg:format-md text-center">
+                <h2 class="my-3">Similar Apps</h2>
+            </div>
+            <ul class="flex flex-wrap mx-auto xs:w-full justify-center">
+                @forelse ($app->similarApps() as $item)
+                    <livewire:app-card
+                        :app="$item"
+                        :key="$item->id"
+                        :short-description="false"
+                        :price="false"
+                        :publisher="false"
+                        :categories="false"
+                        :ratings="false"
+                        :platform="false"
+                    ></livewire:app-card>
+                @empty
+            </ul>
+            @endforelse
         </div>
-        <ul class="flex flex-wrap mx-auto xs:w-full justify-center">
-            @forelse ($app->similarApps() as $item)
-                <livewire:app-card
-                    :app="$item"
-                    :key="$item->id"
-                    :short-description="false"
-                    :price="false"
-                    :publisher="false"
-                    :categories="false"
-                    :ratings="false"
-                    :platform="false"
-                ></livewire:app-card>
-            @empty
-        </ul>
-        @endforelse
-    </div>
+    @endif
+
 </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class App extends Model
 {
@@ -61,14 +62,9 @@ class App extends Model
 
     public function similarApps()
     {
-        // Apps in categories as this app
-        // ignore self
-        // limit to 3
-
         return self::whereHas('categories', function ($query) {
             $query->whereIn('slug', $this->categories->pluck('slug'));
-        })
-            ->where('slug', '!=', $this->slug)
+        })->where('slug', '!=', $this->slug)
             ->limit(3)
             ->get();
     }
@@ -76,5 +72,21 @@ class App extends Model
     public function publisher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(AppPublisher::class, 'publisher_id');
+    }
+
+    public function ratings(): MorphMany
+    {
+        return $this->morphMany(StarRating::class, 'ratable');
+    }
+
+    public function getUserRatingAttribute()
+    {
+        if (auth()->guest()) {
+            return $this->ratings()->avg('value');
+        }
+
+        return $this->ratings()
+            ->where('user_id', auth()->id())
+            ->first()->value ?? $this->ratings()->avg('value');
     }
 }

@@ -18,7 +18,7 @@
     <div>
         <ul class="relative sm:flex flex-wrap sm:justify-start mx-auto bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white p-1 gap-3 w-11/12">
             @forelse($apps as $app)
-                <livewire:app-card :app="$app" :key="$app->id"/>
+                <livewire:app-card :app="$app" :key="'card_'.$app->id"/>
             @empty
                 <li class="text-center w-full">
                     <p class="text-gray-400">No Apps to display.</p>

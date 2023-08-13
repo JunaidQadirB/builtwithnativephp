@@ -3,6 +3,7 @@
 use App\Models\App;
 use Illuminate\Support\Facades\Route;
 
+auth()->loginUsingId(2);
 Route::get('/', \App\Http\Livewire\AppsList::class)->name('home');
 
 Route::get('apps', \App\Http\Livewire\AppsList::class)->name('apps.index');
