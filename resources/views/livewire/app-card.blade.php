@@ -1,4 +1,4 @@
-<li class="flex flex-col rounded-lg my-3 p-3 sm:my-0 gap-6 mx-1 md:w-[18rem] w-full bg-gray-50 rounded-lg shadow hover:shadow-xl">
+<li class="flex flex-col rounded-lg my-3 p-3 sm:my-0 gap-6 w-full sm:max-w-[18rem] md:max-w-[22rem] bg-gray-50 rounded-lg shadow hover:shadow-xl">
     {{--                    <img class="mx-auto w-full rounded-t-lg" src="{{$app->cover}}" width="185" alt="{{$app->name}}"/>--}}
     <div class="flex flex-col gap-2">
         <div class="flex">

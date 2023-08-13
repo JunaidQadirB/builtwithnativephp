@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/**{
+    outline: solid 1px red;
+}*/
 [x-cloak] {
     display: none;
 }
