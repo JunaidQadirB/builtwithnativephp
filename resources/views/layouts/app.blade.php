@@ -21,11 +21,11 @@
 <x-banner/>
 
 <div class="min-h-screen">
-    @guest()
-        @livewire('navigation-menu-guest')
-    @elseguest()
+    @auth()
         @livewire('navigation-menu')
-    @endguest()
+    @elseauth()
+        @livewire('navigation-menu-guest')
+    @endauth()
 
 
     <!-- Page Heading -->
