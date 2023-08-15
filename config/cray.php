@@ -19,13 +19,13 @@ return [
          * For example, `components.text` looks for a file in resources\views\components\text.blade.php.
          */
         'component_paths' => [
-            'input_text' => 'components.text',
-            'input_number' => 'components.number',
-            'input_checkbox' => 'components.checkbox',
-            'input_radio' => 'components.radio',
-            'input_file' => 'components.file',
-            'input_date' => 'components.text',
-            'textarea' => 'components.textarea',
+            'input_text' => 'components.tailwind.input',
+            'input_number' => 'components.tailwind.input',
+            'input_checkbox' => 'components.tailwind.checkbox',
+            'input_radio' => 'components.tailwind.radio',
+            'input_file' => 'components.tailwind.file',
+            'input_date' => 'components.tailwind.input',
+            'textarea' => 'components.tailwind.textarea',
         ],
 
         /**

@@ -5,7 +5,10 @@ use Illuminate\Support\Facades\Route;
 
 auth()->loginUsingId(2);
 Route::get('/', \App\Http\Livewire\AppsList::class)->name('home');
-
+Route::get('apps/{app}/edit', function (App $app) {
+    return view('apps.edit', compact('app'));
+})->name('apps.edit');
+Route::put('apps/{app}',function($app){})->name('apps.update');
 Route::get('apps', \App\Http\Livewire\AppsList::class)->name('apps.index');
 
 Route::get('apps/{app}', \App\Http\Livewire\AppDetails::class)->name('apps.show');

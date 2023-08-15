@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('name');
             $table->string('icon');
             $table->string('cover');
-            $table->string('short_description', 300);
-            $table->string('description', 1000);
+            $table->string('short_description', 100);
+            $table->string('description', 3000);
             $table->string('slug')->unique();
             $table->unsignedBigInteger('publisher_id');
             $table->double('price')->default(0.00);

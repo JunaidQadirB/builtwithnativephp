@@ -111,6 +111,16 @@
 
                             <div class="border-t border-gray-200 dark:border-gray-600"></div>
 
+                            <div class="block px-4 py-2 text-xs text-gray-400">
+                                {{ __('Manage Apps') }}
+                            </div>
+
+                            <x-dropdown-link href="{{ route('apps.submit') }}">
+                                {{ __('Submit your App') }}
+                            </x-dropdown-link>
+
+                            <div class="border-t border-gray-200 dark:border-gray-600"></div>
+
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}" x-data>
                                 @csrf
