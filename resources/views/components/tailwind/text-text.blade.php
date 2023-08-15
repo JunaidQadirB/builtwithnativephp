@@ -3,7 +3,7 @@
     <div class="{{@$rightCol??'sm:flex-1'}}">
         <div class="relative flex flex-wrap items-stretch">
             <select type="text" class="inline-block h-auto w-full py-2 px-3 text-base leading-4 border text-sm align-middle {{$errors->has($name) ? 'border-red-500' : null}}"
-                    name="{{$name}}" wire:model="{{$name}}" id="{{$name}}"
+                    name="{{$name}}" wire:model.live="{{$name}}" id="{{$name}}"
                     aria-describedby="{{$name}}HelpId">
                 <option value="">Select</option>
                 @foreach($options as $option)

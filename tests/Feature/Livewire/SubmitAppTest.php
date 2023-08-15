@@ -2,9 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\SubmitApp;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
+use App\Livewire\SubmitApp;
 use Livewire\Livewire;
 use Tests\TestCase;
 

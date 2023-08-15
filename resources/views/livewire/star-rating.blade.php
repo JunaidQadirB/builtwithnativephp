@@ -1,6 +1,8 @@
 <div class="flex items-center py-1">
     @foreach(range(1, 5) as $i)
-        <label for="rating-{{ $i }}" class="cursor-pointer" wire:key="star_{{$app->id}}_{{$i}}"
+        <label for="rating-{{ $i }}"
+               class="cursor-pointer"
+               wire:key="star_{{$app->id}}_{{$i}}"
                wire:click="rate({{$i}})">
             <span class="sr-only">Rating {{ $i }}</span>
             <svg

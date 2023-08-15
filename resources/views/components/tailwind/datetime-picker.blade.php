@@ -13,7 +13,7 @@
 
         <input data-input class="relative flex-auto block py-1.5 px-3 text-sm font-normal border border-r-0 border-gray-400 outline-none focus:ring-2 focus:ring-blue-400 focus:border-blue-500 {{$errors->has($name) ? 'border-red-500' : null}}"
 
-               name="{{$name}}" wire:model="{{$name}}" id="{{isset($id)?$id:$name}}"
+               name="{{$name}}" wire:model.live="{{$name}}" id="{{isset($id)?$id:$name}}"
                aria-describedby="{{isset($id)?$id:$name}}HelpId"
                value="{{old($name, $value)}}"
                @if(@$placeholder) placeholder="{{@$placeholder}}" @endif
@@ -29,7 +29,7 @@
             </button>
         </div>
         {{-- <flat-pickr class="form-control {{$errors->has($name) ? 'is-invalid' : null}}"
-                     name="{{$name}}" wire:model="{{$name}}" id="{{isset($id)?$id:$name}}" aria-describedby="{{isset($id)?$id:$name}}HelpId"
+                     name="{{$name}}" wire:model.live="{{$name}}" id="{{isset($id)?$id:$name}}" aria-describedby="{{isset($id)?$id:$name}}HelpId"
                      value="{{old($name, $value)}}"
                      :config="{
                                  wrap: true,

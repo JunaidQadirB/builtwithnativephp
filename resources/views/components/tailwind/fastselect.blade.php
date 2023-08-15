@@ -7,7 +7,7 @@
                @if(isset($value))
                data-initial-value="{{ $value }}"
                @endif
-               name="{{$name}}" wire:model="{{$name}}"
+               name="{{$name}}" wire:model.live="{{$name}}"
                multiple="{{@$multiple ?? false}}"
                data-url="{{$url}}"
                data-user-option-allowed="true"

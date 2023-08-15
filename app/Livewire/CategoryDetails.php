@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\AppCategory;
 use Livewire\Component;
@@ -11,17 +11,18 @@ class CategoryDetails extends Component
     use withPagination;
 
     public AppCategory $category;
+
     public $searchTerm = '';
 
     public $queryString = [
         'searchTerm' => ['except' => ''],
         'page' => ['except' => 1],
     ];
+
     public $listeners = [
         'onSearch' => 'search',
         'onClearSearch' => 'clearSearchTerm',
     ];
-
 
     public function search($searchTerm, $selectedCategories)
     {

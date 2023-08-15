@@ -3,7 +3,7 @@
     <select type="text" @if(isset($multiple) && $multiple) multiple @endif size="{{$size ?? 8}}"
     @if(isset($required) && $required) required @endif
             class="inline-block h-auto w-full py-2 px-3 text-base leading-4 border text-sm align-middle outline-0 focus:ring-1 ring-blue-200 {{$errors->has($name) ? 'border-red-500' : null}}"
-            name="{{$name}}" wire:model="{{$name}}" id="{{@$id?$id:$name}}"
+            name="{{$name}}" wire:model.live="{{$name}}" id="{{@$id?$id:$name}}"
             aria-describedby="{{@$id?$id:$name}}HelpId">
         @if(!isset($multiple) || (isset($multiple)&& $multiple!==true))
             <option value="">Select</option>

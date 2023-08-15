@@ -1,6 +1,6 @@
 <div class="mb-4"
      x-data="{
-    value: @entangle($attributes->wire('model')),
+    value: @entangle($attributes->wire('model')).live,
     initPikaday(){
     new Pikaday({
         field: this.$refs.{{ $attributes['name']}},

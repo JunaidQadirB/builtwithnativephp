@@ -1,5 +1,5 @@
 <div class="my-3 flex justify-center">
-    <form class="w-full px-3 sm:px-0 sm:w-6/12 " wire:submit.prevent="search">
+    <form class="w-full px-3 sm:px-0 sm:w-6/12 " wire:submit="search">
         <div class="flex justify-center w-auto">
             @if ($showCategories)
                 <button id="dropdownSearchButton" data-dropdown-toggle="dropdownSearch" data-dropdown-placement="bottom"
@@ -36,7 +36,7 @@
                             <li wire:key="cats_{{$category->id}}">
                                 <div class="flex items-center pl-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                     <input id="category_{{$category->slug}}" type="checkbox"
-                                           wire:model="selectedCategories"
+                                           wire:model.live="selectedCategories"
                                            value="{{$category->slug}}"
                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                                     <label for="category_{{$category->slug}}"
@@ -54,7 +54,7 @@
             @endif
 
             <div class="relative w-full">
-                <input wire:model="searchTerm" type="search" id="search-dropdown" minlength="2"
+                <input wire:model.live="searchTerm" type="search" id="search-dropdown" minlength="2"
                        class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg rounded-l-lg @if($showCategories) border-l-gray-50 border-l-2 @endif border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
                        placeholder="Find your favorite NativePHP app" required/>
 

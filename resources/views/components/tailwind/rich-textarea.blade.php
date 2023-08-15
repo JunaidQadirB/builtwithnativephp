@@ -5,7 +5,7 @@
         <trix-editor
             value="{{old($name, $value)}}"
             rows="{{@$rows??5}}" class="block w-full py-2 px-3 text-base leading-4 border outline-0 focus:ring-1 ring-blue-200 {{$errors->has($name) ? 'border-red-500' : null}}"
-            id="{{isset($id)?$id:$name}}" wire:model="{{$name}}" aria-describedby="{{$name}}HelpId"
+            id="{{isset($id)?$id:$name}}" wire:model.live="{{$name}}" aria-describedby="{{$name}}HelpId"
             @if(@$placeholder) placeholder="{{@$placeholder}}" @endif
             input="{{$name}}Input"></trix-editor>
 

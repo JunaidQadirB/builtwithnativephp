@@ -24,6 +24,7 @@ class AppPlatformFactory extends Factory
         ];
 
         $platform = $platforms[array_rand($platforms)];
+
         return [
             'name' => $platform,
             'slug' => Str::slug($platform),

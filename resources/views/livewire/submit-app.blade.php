@@ -16,7 +16,7 @@
             :value="old('short_description')" />
 
         <x-tailwind.textarea
-            wire:model="description"
+            wire:model.live="description"
             name="description"
             label="Description"
             type="text" />

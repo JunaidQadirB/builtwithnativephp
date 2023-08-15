@@ -1,16 +1,19 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use App\Models\AppCategory;
 use Livewire\Component;
 
 class Search extends Component
 {
     public $searchTerm = '';
+
     public $selectedCategories = [];
+
     public $categories = [];
+
     public $isOpen = false;
+
     public $showCategories = true;
 
     public function clearSearchTerm(): void
@@ -21,7 +24,7 @@ class Search extends Component
 
     public function toggleCategoriesDropdown(): void
     {
-        $this->isOpen = !$this->isOpen;
+        $this->isOpen = ! $this->isOpen;
     }
 
     public function unSelectAllCategories(): void

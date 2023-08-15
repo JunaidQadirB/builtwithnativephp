@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\App;
 use Livewire\Component;
@@ -8,17 +8,19 @@ use Livewire\Component;
 class StarRating extends Component
 {
     public App $app;
+
     public ?int $rating = null;
+
     public bool $reviews = false;
 
     public function getAverageProperty(): float
     {
-        return round($this->app->ratings()->avg('value'),2);
+        return round($this->app->ratings()->avg('value'), 2);
     }
 
     public function rate(int $value): void
     {
-        if(!auth()->check()) {
+        if (! auth()->check()) {
             return;
         }
 

@@ -22,7 +22,9 @@
             <div class="text-gray-400 text-sm">
                 @if($app->categories->count())
                     @foreach($app->categories as $cat)
-                        <a class="hover:text-gray-600" href="{{route('categories.show', $cat->slug)}}"
+                        <a class="hover:text-gray-600"
+                           wire:key="category_{{$app->id}}_{{$cat->id}}"
+                           href="{{route('categories.show', $cat->slug)}}"
                            title="Goto {{$cat->name}}">{{$cat->name}}</a>
                     @endforeach
                 @endif
@@ -43,6 +45,7 @@
             <div class="flex justify-between my-3">
                 @foreach($app->platforms as $os)
                     <img class="text-gray-400"
+                         wire:key="platform_{{$app->id}}_{{$os->id}}"
                          src="{{'/vendor/blade-heroicons/m-' . $os->slug . '.svg'}}" width="22"
                          alt="{{$os->name}}"/>
                 @endforeach

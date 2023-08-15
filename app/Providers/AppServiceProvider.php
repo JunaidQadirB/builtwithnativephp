@@ -23,16 +23,16 @@ class AppServiceProvider extends ServiceProvider
     {
         Builder::macro('search', function ($field, $string) {
             $string = Str::of($string)->trim()->split('/[\s,]+/')->toArray();
-            if(count($string) > 1) {
+            if (count($string) > 1) {
                 return $this->where(function ($query) use ($field, $string) {
                     foreach ($string as $word) {
-                        $query->orWhere($field, 'like', '%' . $word . '%');
+                        $query->orWhere($field, 'like', '%'.$word.'%');
                     }
                 });
             }
 
             return $string
-                ? $this->where($field, 'like', '%' . $string[0] . '%')
+                ? $this->where($field, 'like', '%'.$string[0].'%')
                 : $this;
         });
     }

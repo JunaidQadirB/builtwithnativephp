@@ -12,7 +12,7 @@
         @endif
         <input class="block flex-1 py-2 px-3 text-base leading-4 border placeholder-gray-400 placeholder:text-sm outline-0 focus:ring-1 ring-blue-200 {{$errors->has($name) ? 'border-red-500' : null}}"
                type="{{@$type?:'text'}}"
-               name="{{$name}}" wire:model="{{$name}}" id="{{isset($id)?$id:$name}}" aria-describedby="{{isset($id)?$id:$name}}HelpId"
+               name="{{$name}}" wire:model.live="{{$name}}" id="{{isset($id)?$id:$name}}" aria-describedby="{{isset($id)?$id:$name}}HelpId"
                value="{{old($name, @$value)}}"
                @if(@$placeholder) placeholder="{{@$placeholder}}" @endif
                @if(@$pattern) pattern="{{@$pattern}}" @endif

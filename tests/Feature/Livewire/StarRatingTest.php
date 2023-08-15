@@ -2,10 +2,8 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\StarRating;
+use App\Livewire\StarRating;
 use App\Models\App;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -20,6 +18,4 @@ class StarRatingTest extends TestCase
 
         $component->assertStatus(200);
     }
-
-
 }

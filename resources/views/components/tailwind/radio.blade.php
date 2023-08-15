@@ -3,7 +3,7 @@
     <div class="{{@$rightCol??'sm:flex-1'}}">
         @foreach($options as $key => $option)
             <div class="flex items-center w-full mb-1.5">
-                <input class="overflow-visible" type="radio" name="{{$name}}" wire:model="{{$name}}" id="{{$name}}{{$key}}"
+                <input class="overflow-visible" type="radio" name="{{$name}}" wire:model.live="{{$name}}" id="{{$name}}{{$key}}"
                        value="{{$option['value']}}"
                        @if(old($name, $value) == $option['value']) checked @endif
                 >

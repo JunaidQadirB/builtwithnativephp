@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\App;
 use App\Models\AppCategory;
@@ -13,8 +13,11 @@ class AppsList extends Component
     use withPagination;
 
     public string $searchTerm = '';
+
     public array $platform = [];
+
     public array $selectedCategories = [];
+
     public array $selectedPlatforms = [];
 
     public function updatingSearch()
@@ -28,12 +31,12 @@ class AppsList extends Component
         'selectedCategories' => ['except' => []],
         'page' => ['except' => 1],
     ];
+
     public $listeners = [
         'onSearch' => 'search',
         'onClearSearch' => 'clearSearchTerm',
         'onSelectAllCategories' => 'selectAllCategories',
     ];
-
 
     public function search($searchTerm, $selectedCategories)
     {
@@ -54,7 +57,7 @@ class AppsList extends Component
 
     public function togglePlatform($platform): void
     {
-        $platform = (object)$platform;
+        $platform = (object) $platform;
 
         if (in_array($platform->slug, $this->platform, true)) {
             $this->platform = array_diff($this->platform, [$platform->slug]);
