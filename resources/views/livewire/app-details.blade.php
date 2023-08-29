@@ -3,7 +3,7 @@
     <div class="format lg:format-md w-12/12 mx-auto mt-5 mb-5 px-3">
         <article class="format lg:format-md">
             <div class="flex flex-row gap-2 my-0">
-                <img src="{{$app->icon}}" alt="{{$app->name}} Icon" width="150px" class="py-0 my-0 mb-3"/>
+                <img src="{{$app->iconUrl}}" alt="{{$app->name}} Icon" width="150px" class="py-0 my-0 mb-3"/>
                 <div class="flex flex-col gap-2">
                     <h1 class="mb-2">{{$app->name}}</h1>
                     @if($app->publisher)

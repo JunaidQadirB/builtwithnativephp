@@ -1,42 +1,29 @@
-@props([
-    'name',
-    'label',
-    'value' => null,
-    'helpText' => null,
-    'placeholder' => null,
-    'prepend' => null,
-    'append' => null,
-    'isImage' => false
-])
-
 <div class="text-gray-600 mb-3 {{@$isImage ? 'mb-0' : ''}}" wire:ignore
-     @if(@$isImage) x-data="fileInput" @endif>
+     @if(@$isImage) x-data="fileInput" @endif
+>
     <label for="{{$name}}" class="block mb-1.5">{{$label}}</label>
-    <div class="relative flex flex-wrap items-stretch py-1.5 px-2 border">
+    <div class="relative flex flex-wrap items-stretch py-1.5 px-2">
         @if(isset($prepend) && strlen(trim($prepend)) > 0)
             <div class="flex -mr-[-1px]">
-                @if($prepend != strip_tags($prepend))
+                @if($prepend !== strip_tags($prepend))
                     {!! $prepend !!}
                 @else
-                    <span
-                        class="flex items-center py-1.5 px-3 text-base text-gray-700 bg-gray-200 border rounded">{{$prepend}}</span>
+                    <span class="flex items-center py-1.5 px-3 text-base text-gray-700 bg-gray-200 border rounded">{{$prepend}}</span>
                 @endif
             </div>
         @endif
-        <input
-            class="relative flex flex-wrap items-stretch w-full pb-5 {{$errors->has($name) ? 'border-red-600' : null}}"
-            type="file"
-            name="{{$name}}" id="{{$name}}" aria-describedby="{{$name}}HelpId"
-            value="{{old($name, $value)}}"
-            @if(@$placeholder) placeholder="{{@$placeholder}}" @endif
+        <input class="relative flex flex-wrap items-stretch w-full pb-5 {{$errors->has($name) ? 'border-red-600' : null}}"
+               type="file"
+               name="{{$name}}" id="{{$name}}" aria-describedby="{{$name}}HelpId"
+               wire:model="value"
+               @if(@$placeholder) placeholder="{{@$placeholder}}" @endif
         />
         @if(isset($append) && strlen(trim($append)) > 0)
             <div class="flex -mr-[-1px]">
                 @if($append != strip_tags($append))
                     {!! $append !!}
                 @else
-                    <span
-                        class="flex items-center py-1.5 px-3 text-base text-gray-700 bg-gray-200 border rounded">{{$append}}</span>
+                    <span class="flex items-center py-1.5 px-3 text-base text-gray-700 bg-gray-200 border rounded">{{$append}}</span>
                 @endif
             </div>
         @endif
@@ -53,6 +40,9 @@
     @else
         <small id="{{$name}}HelpId" class="block mt-1 text-gray-500">{!! @$helpText !!}</small>
     @endif
+    {{var_dump($errors->toArray())}}
+    {{var_dump(session()->get('errors'))}}
+
 </div>
 @if(@$isImage)
     @push('scripts')
@@ -84,3 +74,29 @@
         </script>
     @endpush
 @endif
+
+<?php
+
+use Livewire\Volt\Component;
+
+new class extends Component {
+
+    use \Livewire\WithFileUploads;
+
+    public ?string $name = '';
+    public ?string $label = '';
+    #[\Livewire\Attributes\Modelable]
+    public ?string $value = '';
+    public bool $isImage = false;
+    public ?string $placeholder = '';
+    public ?string $helpText = '';
+    public ?string $prepend = '';
+    public ?string $append = '';
+
+    public function mount()
+    {
+    }
+
+}
+
+?>

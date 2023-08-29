@@ -115,6 +115,10 @@
                                 {{ __('Manage Apps') }}
                             </div>
 
+                            <x-dropdown-link href="{{ route('my-apps') }}">
+                                {{ __('My Apps') }}
+                            </x-dropdown-link>
+
                             <x-dropdown-link href="{{ route('apps.submit') }}">
                                 {{ __('Submit your App') }}
                             </x-dropdown-link>

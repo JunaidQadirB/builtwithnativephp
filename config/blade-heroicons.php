@@ -15,6 +15,9 @@ return [
 
     'prefix' => 'heroicon',
 
+    'paths' => [
+        base_path('public/vendor/blade-heroicons'),
+    ],
     /*
     |-----------------------------------------------------------------
     | Fallback Icon

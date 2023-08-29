@@ -19,7 +19,7 @@ class Search extends Component
     public function clearSearchTerm(): void
     {
         $this->searchTerm = '';
-        $this->emit('onClearSearch');
+        $this->dispatch('onClearSearch');
     }
 
     public function toggleCategoriesDropdown(): void
@@ -34,7 +34,7 @@ class Search extends Component
 
     public function search(): void
     {
-        $this->emit('onSearch', $this->searchTerm,
+        $this->dispatch('onSearch', $this->searchTerm,
             $this->selectedCategories
         );
     }

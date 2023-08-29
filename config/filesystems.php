@@ -43,7 +43,34 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
-
+        'icon' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/icons'),
+            'url' => env('APP_URL').'/storage/icons',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'app_win' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/apps/win'),
+            'url' => env('APP_URL').'/storage/apps/win',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'app_mac' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/apps/mac'),
+            'url' => env('APP_URL').'/storage/apps/mac',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'app_linux' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/apps/linux'),
+            'url' => env('APP_URL').'/storage/apps/linux',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),

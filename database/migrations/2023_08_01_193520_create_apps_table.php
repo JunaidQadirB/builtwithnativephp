@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('apps', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('icon');
-            $table->string('cover');
             $table->string('short_description', 100);
             $table->string('description', 3000);
-            $table->string('slug')->unique();
+            $table->json('screenshots');
             $table->unsignedBigInteger('publisher_id');
             $table->double('price')->default(0.00);
             $table->boolean('in_app_purchases')->default(false);

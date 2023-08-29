@@ -23,16 +23,23 @@ class AppFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'description' => $this->faker->text(1000),
-            'short_description' => $this->faker->text(300),
+            'description' => $this->faker->text(3000),
+            'short_description' => $this->faker->text(100),
             'slug' => $this->faker->slug,
             'icon' => $this->faker->imageUrl(256, 256, 'cats'),
-            'cover' => $this->faker->imageUrl(1920, 1080, 'cats'),
-            'status' => $this->faker->randomElement(['Draft', 'Published']),
+            'screenshots' => json_encode(['path' => $this->faker->imageUrl(256, 256, 'cats')]),
+            'status' => $this->faker->randomElement(['Draft', 'Published', 'Rejected']),
             'in_app_purchases' => $this->faker->randomElement([true, false]),
             'price' => $this->faker->randomFloat(2.00, 0.00, 100.00),
             'rating' => $this->faker->randomFloat(1.00, 0.00, 5.00),
-            'publisher_id' => AppPublisherFactory::new(),
+            'publisher_id' => \App\Models\User::factory()->create()->id,
         ];
+    }
+
+    public function withPublisher($user): AppFactory
+    {
+        return $this->state(function (array $attributes) {
+            return $attributes;
+        });
     }
 }

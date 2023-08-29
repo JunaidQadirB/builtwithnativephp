@@ -5,10 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Storage;
 
 class App extends Model
 {
     use HasFactory;
+
+    protected $guarded = ['id'];
+
+    public static function booted()
+    {
+        static::addGlobalScope('publishedApps', static function ($query) {
+            $query->where('status', 'Published');
+        });
+    }
 
     public function getRouteKeyName(): string
     {
@@ -18,6 +28,13 @@ class App extends Model
     public function getUrlAttribute(): string
     {
         return route('apps.show', $this);
+    }
+
+    public function getIconUrlAttribute(): bool|string
+    {
+        return Storage::disk('icon')->exists($this->icon)
+            ? Storage::disk('icon')->url($this->icon)
+            : false;
     }
 
     public function getFormattedPriceAttribute(): string
@@ -38,7 +55,7 @@ class App extends Model
     public function platformIcons()
     {
         return $this->platforms->map(function ($platform) {
-            return '/vendor/blade-heroicons/m-'.$platform->slug.'svg';
+            return '/vendor/blade-heroicons/m-os-'.$platform->slug.'svg';
 
         });
     }
@@ -71,12 +88,12 @@ class App extends Model
 
     public function publisher(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(AppPublisher::class, 'publisher_id');
+        return $this->belongsTo(User::class, 'publisher_id');
     }
 
-    public function ratings(): MorphMany
+    public function isOwner(): bool
     {
-        return $this->morphMany(StarRating::class, 'ratable');
+        return auth()->check() && auth()->id() === $this->publisher_id;
     }
 
     public function getUserRatingAttribute()
@@ -88,5 +105,20 @@ class App extends Model
         return $this->ratings()
             ->where('user_id', auth()->id())
             ->first()->value ?? $this->ratings()->avg('value');
+    }
+
+    public function ratings(): MorphMany
+    {
+        return $this->morphMany(StarRating::class, 'ratable');
+    }
+
+    public function scopeDraft($query): void
+    {
+        $query->where('status', 'Draft');
+    }
+
+    public function scopePublish($query): void
+    {
+        $query->where('status', 'Publish');
     }
 }

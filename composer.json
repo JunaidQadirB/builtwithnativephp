@@ -14,7 +14,8 @@
         "laravel/jetstream": "^3.2",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "livewire/livewire": "^v3.0.0-beta.8",
+        "livewire/livewire": "^v3.0.0-beta.9",
+        "livewire/volt": "^v1.0.0-beta.5",
         "filament/filament": "^v3.0.22"
     },
     "require-dev": {

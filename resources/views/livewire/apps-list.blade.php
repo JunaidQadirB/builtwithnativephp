@@ -18,7 +18,9 @@
     <livewire:search :categories="(object)$categories" :selectedCategories="$selectedCategories"
                      :search-term="$searchTerm" onSearch="search"/>
     <div>
-        <ul class="w-10/12 gap-3 w-full px-3 sm:px-0 sm:mx-auto flex flex-wrap justify-center bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
+        <ul class="max-w-7xl mx-auto py-6 px-3 sm:px-6 lg:px-3
+        gap-3 grid grid-cols-auto sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white
+        ">
             @forelse($apps as $app)
                 <livewire:app-card :app="$app" :key="'card_'.$app->id"/>
             @empty

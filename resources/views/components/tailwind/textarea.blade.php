@@ -1,12 +1,33 @@
-<div class="mb-4 text-gray-600">
-    <label for="{{$name}}" class="block mb-1.5">{{$label}}</label>
-    <textarea rows="{{@$rows??5}}" class="block w-full py-2 px-3 text-base leading-4 border placeholder-gray-400 placeholder:text-sm outline-0 focus:ring-1 ring-blue-200 {{$errors->has($name) ? 'border-red-500' : null}}"
-              name="{{$name}}" wire:model.live="{{$name}}" id="{{$name}}" aria-describedby="{{$name}}HelpId"
-              @if(@$placeholder) placeholder="{{@$placeholder}}" @endif>@if(@$value) {{old($name, @$value)}} @endif</textarea>
-    @if($errors->has($name))
-        <small id="{{$name}}HelpId" class="block mt-1 text-red-500">{{$errors->first($name)}}</small>
-    @else
-        <small id="{{$name}}HelpId" class="block mt-1 text-gray-500">{{@$helpText}}</small>
-    @endif
-    {{$value}}
+@props([
+    'disabled' => false,
+    'name' => '',
+    'label' => '',
+    'maxlength' => 0,
+    'showLength' => false,
+])
+
+<div class="inline-flex gap-1 flex-col" x-data="{}"
+>
+    <div class="flex justify-between px-1">
+        <x-label value="{{$label}}"></x-label>
+        @if ($maxlength ||$showLength)
+            <div class="text-xs text-right"
+                 wire:ignore.self
+                 @if ($maxlength > 0)
+                     x-text="`${$wire.get('{{$name}}') ? $wire.get('{{$name}}').length:'0'} / {{$maxlength}}`"
+                 @elseif ($showLength)
+                     x-text="`${$wire.get('{{$name}}').length} characters`"
+                    @endif
+            ></div>
+        @endif
+    </div>
+
+    <textarea x-ref="{{$name}}" wire:model="{{$name}}"
+           class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm"
+           {{ $disabled ? 'disabled' : '' }}
+           @if ($maxlength > 0)
+               maxlength="{{$maxlength}}"
+            @endif
+    ></textarea>
+    <x-input-error for="{{$name}}"/>
 </div>
