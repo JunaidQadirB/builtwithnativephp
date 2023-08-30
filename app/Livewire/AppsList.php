@@ -19,29 +19,21 @@ class AppsList extends Component
     public array $selectedCategories = [];
 
     public array $selectedPlatforms = [];
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
     public $queryString = [
         'searchTerm' => ['except' => ''],
         'platform' => ['except' => []],
         'selectedCategories' => ['except' => []],
         'page' => ['except' => 1],
     ];
-
     public $listeners = [
         'onSearch' => 'search',
         'onClearSearch' => 'clearSearchTerm',
         'onSelectAllCategories' => 'selectAllCategories',
     ];
 
-    public function search($searchTerm, $selectedCategories)
+    public function updatingSearch()
     {
-        $this->searchTerm = $searchTerm;
-        $this->selectedCategories = $selectedCategories;
+        $this->resetPage();
     }
 
     public function clearSearchTerm()
@@ -92,5 +84,11 @@ class AppsList extends Component
         $platforms = AppPlatform::all();
 
         return view('livewire.apps-list', compact('apps', 'categories', 'platforms'));
+    }
+
+    public function search($searchTerm, $selectedCategories)
+    {
+        $this->searchTerm = $searchTerm;
+        $this->selectedCategories = $selectedCategories;
     }
 }

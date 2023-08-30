@@ -25,7 +25,7 @@
     @else()
         @livewire('navigation-menu-guest')
     @endauth()
-    
+
     <!-- Page Heading -->
     @if (isset($header))
         <header class="bg-white dark:bg-gray-800 shadow">

@@ -74,10 +74,10 @@
             </div>
         @endif
         @if($showCategories)
-            <div class="text-gray-400 text-sm">
+            <div class="text-gray-400 text-xs">
                 @if($app->categories->count())
                     @foreach($app->categories as $cat)
-                        <a class="hover:text-gray-600"
+                        <a class="hover:text-gray-600  bg-purple-100 text-purple-800 rounded-xl py-1 px-2"
                            wire:key="category_{{$app->id}}_{{$cat->id}}"
                            href="{{route('categories.show', $cat->slug)}}"
                            title="Goto {{$cat->name}}">{{$cat->name}}</a>
