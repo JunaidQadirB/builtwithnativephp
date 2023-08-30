@@ -22,11 +22,10 @@
 <div class="min-h-screen">
     @auth()
         @livewire('navigation-menu')
-    @elseauth()
+    @else()
         @livewire('navigation-menu-guest')
     @endauth()
-
-
+    
     <!-- Page Heading -->
     @if (isset($header))
         <header class="bg-white dark:bg-gray-800 shadow">

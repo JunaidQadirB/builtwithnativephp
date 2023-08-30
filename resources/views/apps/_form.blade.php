@@ -3,7 +3,7 @@
         name="name"
         label="Name"
         type="text"
-        :value="old('name')" />
+        :value="$app->name" />
 
 <x-dynamic-component
         component="tailwind.input"

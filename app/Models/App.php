@@ -16,7 +16,12 @@ class App extends Model
     public static function booted()
     {
         static::addGlobalScope('publishedApps', static function ($query) {
-            $query->where('status', 'Published');
+            // only when the user is not logged in
+            if (auth()->guest()) {
+                $query->where('status', 'Published');
+
+                return;
+            }
         });
     }
 
