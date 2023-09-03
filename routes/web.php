@@ -4,7 +4,7 @@ use App\Livewire\AppsList;
 use App\Models\App;
 use Illuminate\Support\Facades\Route;
 
-//auth()->loginUsingId(2);
+auth()->loginUsingId(2);
 Route::get('/', AppsList::class)->name('home');
 
 Route::get('apps/{app}/edit', function (App $app) {
