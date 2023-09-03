@@ -11,6 +11,8 @@ class App extends Model
 {
     use HasFactory;
 
+    protected $with = ['categories', 'platforms'];
+
     protected $guarded = ['id'];
 
     public static function booted()

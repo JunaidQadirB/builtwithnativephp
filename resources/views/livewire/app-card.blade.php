@@ -1,7 +1,5 @@
-<li class="{{
-    collect(['class' =>'group/item flex flex-col rounded-lg relative p-3 sm:my-0 gap-6 w-auto bg-white rounded-lg shadow hover:shadow-xl'])
-    ->union(['passed_class' => $class])->implode(' ')
-}}">
+<li class="{{collect(['class' =>'group/item flex flex-col rounded-lg relative p-3 sm:my-0 gap-6 w-auto bg-white rounded-lg shadow hover:shadow-xl'])
+    ->union(['passed_class' => $class])->implode(' ')}}">
     <div class="flex flex-col gap-2">
         <div class="flex justify-between">
             @if($app->iconUrl)
@@ -89,9 +87,11 @@
             <div class="flex justify-between">
                 <div>
                     <livewire:star-rating
+                        wire:key="rating_{{$app->id}}"
                         :app="$app"
                         :rating="$app->userRating"
-                        :reviews="false"/>
+                        :reviews="false">
+                    </livewire:star-rating>
                 </div>
                 <div>
                     <span class="text-sm font-bold">{{$app->price<=0 ? 'Free' : $app->formatted_price}}</span>
@@ -113,9 +113,6 @@
 
         @endif
     </div>
-    @if ($app->isOwner())
-
-    @endif
     {{-- <a href="{{$app->url}}"
         class="mt-auto pt-2 rounded-lg w-full text-center border h-[40px] hover:bg-blue-500 hover:text-white">App
          details</a>--}}
