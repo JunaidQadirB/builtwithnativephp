@@ -56,6 +56,7 @@ class AppsList extends Component
     {
         if (in_array($platform, $this->platform)) {
             $this->platform = array_diff($this->platform, [$platform]);
+
             return;
         }
         $this->platform[] = $platform;
