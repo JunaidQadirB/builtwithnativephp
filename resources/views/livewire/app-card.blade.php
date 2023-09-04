@@ -1,26 +1,39 @@
 <li class="{{collect(['class' =>'group/item flex flex-col rounded-lg relative p-3 sm:my-0 gap-2 w-auto bg-white rounded-lg shadow hover:shadow-xl'])
     ->union(['passed_class' => $class])->implode(' ')}}">
     <div class="flex flex-col gap-2">
-        <div class="flex justify-between">
+
+        <div class="flex flex-row">
             @if($app->iconUrl)
-                <div>
+                <div class="basis-1/6 mr-2">
                     <img class="p-0 m-0 min-w-[60px] w-[60px] aspect-square rounded-lg shadow" src="{{$app->iconUrl}}"
                          alt="{{$app->name}}"/>
                 </div>
             @endif
-            <h2 class="text-xl my-0 font-bold break-all truncate overflow-hidden max-w-2xl w-44"
-                title="{{$app->name}}">{{$app->name}}</h2>
+            <div class="basis-full">
+                <h2 class="text-xl my-0 font-bold break-all truncate overflow-hidden max-w-2xl w-46 xs:w-56"
+                    title="{{$app->name}}">{{$app->name}}</h2>
+                @if($showPublisher)
+                    <span class="inline-block text-gray-400 text-sm text-clip ">
+                    @if ($app->publisher?->url)
+                            <a class="hover:text-gray-600" href="{{$app->publisher->url}}" target="_blank"
+                               title="Opens in a new tab">{{$app->publisher?->name}}</a>
+                        @else
+                            {{$app->publisher?->name}}
+                        @endif
+                </span>
 
-            <div class="flex">
+                @endif
+            </div>
+            <div class="flex ml-2">
                 @if ($showStatus)
-                    <div class="self-center">
+                    <div class="self-start">
                     <span
                         class="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full {{$this->statusColor($app->status)}}">{{$app->status}}</span>
                     </div>
                 @endif
 
                 @if (@$app->isOwner())
-                    <div class="group/edit invisible group-hover/item:visible">
+                    <div class="group/edit ml-auto invisible group-hover/item:visible">
                         <button id="dropdownMenuIconButton{{$app->id}}" data-dropdown-toggle="dropdownDots{{$app->id}}"
                                 class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
                                 type="button">
@@ -61,20 +74,8 @@
             </div>
 
         </div>
-        @if($showPublisher)
-
-            <span class="inline-block text-gray-400 text-sm text-clip ">
-                    @if ($app->publisher?->url)
-                    <a class="hover:text-gray-600" href="{{$app->publisher->url}}" target="_blank"
-                       title="Opens in a new tab">{{$app->publisher?->name}}</a>
-                @else
-                    {{$app->publisher?->name}}
-                @endif
-                </span>
-           
-        @endif
         @if($showCategories)
-            <div class="text-gray-400 my-1 text-xs">
+            <div class="text-gray-400 mt-3 text-xs">
                 @if($app->categories->count())
                     @foreach($app->categories as $cat)
                         <a class="hover:text-gray-600  bg-purple-100 text-purple-800 rounded-xl py-1 px-2"
