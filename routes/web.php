@@ -1,15 +1,13 @@
 <?php
 
 use App\Livewire\AppsList;
-use App\Models\App;
+use App\Livewire\EditApp;
 use Illuminate\Support\Facades\Route;
 
 auth()->loginUsingId(2);
 Route::get('/', AppsList::class)->name('home');
 
-Route::get('apps/{app}/edit', function (App $app) {
-    return view('apps.edit', compact('app'));
-})->name('apps.edit');
+Route::get('apps/{app}/edit', EditApp::class)->name('apps.edit');
 
 Route::put('apps/{app}', function ($app) {
 })->name('apps.update');

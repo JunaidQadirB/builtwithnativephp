@@ -5,11 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Storage;
 
 class App extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $with = ['categories', 'platforms'];
 
@@ -46,7 +48,7 @@ class App extends Model
 
     public function getFormattedPriceAttribute(): string
     {
-        return config('app.currency').' '.number_format($this->price, 2);
+        return config('app.currency') . ' ' . number_format($this->price, 2);
     }
 
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -62,7 +64,7 @@ class App extends Model
     public function platformIcons()
     {
         return $this->platforms->map(function ($platform) {
-            return '/vendor/blade-heroicons/m-os-'.$platform->slug.'svg';
+            return '/vendor/blade-heroicons/m-os-' . $platform->slug . 'svg';
 
         });
     }
@@ -71,14 +73,14 @@ class App extends Model
     {
         $isPlatform = $this->platforms
             ->map(function ($platform) {
-                return (object) [
+                return (object)[
                     'name' => $platform->name,
                     'slug' => $platform->slug,
-                    'url' => url("/apps/{$this->slug}/download/".$platform->slug),
+                    'url' => url("/apps/{$this->slug}/download/" . $platform->slug),
                 ];
             })->toArray();
         if (count($isPlatform) > 0) {
-            return (object) $isPlatform;
+            return (object)$isPlatform;
         }
 
         return null;
@@ -127,5 +129,10 @@ class App extends Model
     public function scopePublish($query): void
     {
         $query->where('status', 'Publish');
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->status === 'Published';
     }
 }

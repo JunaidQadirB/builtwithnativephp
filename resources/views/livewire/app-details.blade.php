@@ -10,7 +10,7 @@
                         <div>
                 <span class="inline-block text-gray-400 text-sm text-clip ">
                     @if ($app->publisher->url)
-                        <a class="hover:text-gray-600" href="{{$app->publisher->url}}" target="_blank"
+                        <a class="hover:text-gray-600" href="{{$app->publisher->url}}" wire:navigate
                            title="Opens in a new tab">{{$app->publisher->name}}</a>
                     @else
                         {{$app->publisher->name}}
@@ -42,7 +42,8 @@
                         <label class="text-sm font-bold">Available for &nbsp;</label>
                         @foreach($app->downloadUrls() as $os)
                             <a href="{{$os->url}}"
-                               wire:key="platform_download_{{$app->id}}_{{$os->id}}"
+                               wire:navigate
+                               wire:key="platform_download_{{$app->id}}_{{$os->name}}"
                                class="no-underline border border-gray-700 hover:border-blue-800 text-blue-700 hover:text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 rounded-full font-medium text-xs px-3 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                 @svg('heroicon-o-arrow-small-down', 'w-4 h-4 inline-block mr-1')
                                 {{$os->name}}
@@ -78,4 +79,23 @@
         </div>
     @endif
 
+    <x-confirmation-modal wire:model.live="confirmAppDeletion">
+        <x-slot name="title">
+            {{ __('Delete App') }} {{$app->name}}
+        </x-slot>
+
+        <x-slot name="content">
+            {{ __('Are you sure you would like to delete this App?') }}
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('confirmAppDeletion')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-3" wire:click="deleteApp" wire:loading.attr="disabled">
+                {{ __('Delete') }}
+            </x-danger-button>
+        </x-slot>
+    </x-confirmation-modal>
 </div>

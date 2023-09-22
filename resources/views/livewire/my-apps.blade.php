@@ -19,4 +19,36 @@
             {{$apps->links()}}
         </div>
     </div>
+
+    <x-confirmation-modal wire:model.live="confirmAppDeletion">
+        <x-slot name="title">
+            {{ __('Delete') }} {{$appNameToDelete}}
+        </x-slot>
+
+        <x-slot name="content">
+            <p>
+                {{ __('Are you sure you would like to delete this App?') }}
+            </p>
+            @if ($appToDeleteIsPublished)
+                <p class="text-red-500 my-3">
+                    <span
+                        class="font-bold">{{_('Warning:')}}</span> {{ __('This App is published and will be removed from the store.') }}
+                </p>
+
+            @endif
+            <p>
+
+            </p>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('confirmAppDeletion')" wire:loading.attr="disabled">
+                {{ __('Cancel') }}
+            </x-secondary-button>
+
+            <x-danger-button class="ml-3" wire:click="deleteApp" wire:loading.attr="disabled">
+                {{ __('Delete') }}
+            </x-danger-button>
+        </x-slot>
+    </x-confirmation-modal>
 </div>

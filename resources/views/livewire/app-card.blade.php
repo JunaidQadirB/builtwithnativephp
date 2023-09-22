@@ -11,7 +11,9 @@
             @endif
             <div class="basis-full">
                 <h2 class="text-xl my-0 font-bold break-all truncate overflow-hidden max-w-2xl w-46 xs:w-56"
-                    title="{{$app->name}}">{{$app->name}}</h2>
+                    title="{{$app->name}}">
+                    <a href="{{$app->url}}" wire:navigate>{{$app->name}}</a>
+                </h2>
                 @if($showPublisher)
                     <span class="inline-block text-gray-400 text-sm text-clip ">
                     @if ($app->publisher?->url)
@@ -52,21 +54,15 @@
                                 aria-labelledby="dropdownMenuIconButton{{$app->id}}">
                                 <li>
                                     <a href="{{route('apps.edit', $app)}}"
+                                       wire:navigate
                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#"
-                                       class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                                 </li>
                             </ul>
                             <div class="py-2">
-                                <a href="#"
-                                   class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated
-                                    link</a>
+                                <button wire:click="deleteApp({{$app->id}})"
+                                        class="block w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-red-100 dark:hover:bg-red-600 dark:text-red-200 dark:hover:text-white">
+                                    Delete
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -26,6 +26,9 @@ class AppCard extends Component
 
     public bool $showPlatform = true;
 
+    public bool $confirmAppDeletion = false;
+    public int|null $appIdToDelete = null;
+
     #[Computed]
     public function statusColor($status): string
     {
@@ -34,6 +37,13 @@ class AppCard extends Component
             'Rejected' => 'border border-red-200 bg-red-50 text-red-600 dark:bg-red-900 dark:text-red-300',
             default => 'border border-yellow-200 bg-yellow-50 text-yellow-600 dark:bg-yellow-900 dark:text-yellow-300',
         };
+    }
+
+    public function deleteApp(): void
+    {
+        $this->dispatch('delete-app', $this->app);
+//        $this->app->delete();
+//        $this->confirmAppDeletion = true;
     }
 
     public function render()

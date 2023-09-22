@@ -4,12 +4,19 @@ namespace App\Livewire;
 
 use App\Models\App;
 use Livewire\Attributes\Rule;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
 class SubmitApp extends Component
 {
     use WithFileUploads;
+
+    #[Url(as: 'step', history: true, keep: true)]
+    public string $step = 'info';
+
+    #[Url(as: 'app_id', history: true, keep: true)]
+    public string $appId;
 
     #[Rule('required')]
     public string $name = '';
@@ -50,10 +57,10 @@ class SubmitApp extends Component
         $data['slug'] = \Str::slug($data['name']);
         $data['screenshots'] = json_encode(['path' => $data['icon']]);
         $data['publisher_id'] = auth()->id();
-        $data['icon'] = $this->icon->storePubliclyAs(null, $data['slug'].'.png', 'icon');
+        $data['icon'] = $this->icon->storePubliclyAs(null, \Str::uuid() . '.png', 'icon');
 
         $app = App::create($data);
-        $this->redirect($app->url);
+        $this->redirect("/submit-app?step=binaries&app_id={$app->id}");
     }
 
     /*    public function dehydrate()
@@ -63,4 +70,12 @@ class SubmitApp extends Component
          $this->formErrors = $this->getErrorBag();
         }*/
 
+    public function render()
+    {
+        if ($this->step === 'binaries') {
+            return view('livewire.submit-app-binaries');
+        }
+
+        return view('livewire.submit-app');
+    }
 }
